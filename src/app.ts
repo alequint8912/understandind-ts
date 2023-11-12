@@ -5,21 +5,35 @@ interface PersonInterface {
   greet(phrase: string): void;
 }
 
-interface Greetable {
-  name: string;
+interface Addfn {
+  (a: number, b: number): number;
+}
+
+let add: Addfn;
+add = (n1: number, n2: number) => n1 + n2;
+
+interface Named {
+  readonly name?: string; // optional property
+}
+
+interface Greetable extends Named {
   greet(phrase: string): void;
 }
 
 class Person implements Greetable {
-  name: string;
+  name?: string;
   age: number;
-  constructor(n: string, a: number) {
-    this.name = n;
+  constructor(a: number, n?: string) {
+    // optional property
+
+    if (n) this.name = n;
     this.age = a;
   }
 
   greet(phrase: string): void {
-    console.log(`${phrase} ${this.name} and I am ${this.age} years old!`);
+    this.name
+      ? console.log(`${phrase} ${this.name} and I am ${this.age} years old!`)
+      : console.log("Hi!");
   }
 }
 
@@ -34,5 +48,6 @@ user1 = {
 };
 
 let user2: Greetable;
-user2 = new Person("Alejandro", 33);
+user2 = new Person(33);
+// user2.name = '' // Cannot assign to 'name' because it is a read-only property.
 user2.greet("Hello, my name is");

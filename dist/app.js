@@ -1,11 +1,16 @@
 "use strict";
+let add;
+add = (n1, n2) => n1 + n2;
 class Person {
-    constructor(n, a) {
-        this.name = n;
+    constructor(a, n) {
+        if (n)
+            this.name = n;
         this.age = a;
     }
     greet(phrase) {
-        console.log(`${phrase} ${this.name} and I am ${this.age} years old!`);
+        this.name
+            ? console.log(`${phrase} ${this.name} and I am ${this.age} years old!`)
+            : console.log("Hi!");
     }
 }
 let user1;
@@ -17,6 +22,6 @@ user1 = {
     },
 };
 let user2;
-user2 = new Person("Alejandro", 33);
+user2 = new Person(33);
 user2.greet("Hello, my name is");
 //# sourceMappingURL=app.js.map
